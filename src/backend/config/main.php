@@ -11,6 +11,7 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'defaultRoute'=>'login/index',
+    'language'=> 'zh-CN',
     'bootstrap' => ['log'],
     'modules' => [],
     'components' => [
@@ -18,6 +19,9 @@ return [
             'identityClass' => 'app\models\Agency',
             'enableAutoLogin' => true,
             'loginUrl'=>['login/login'],
+        ],
+        'request' => [
+            'cookieValidationKey' => 'markv5',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

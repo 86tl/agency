@@ -42,7 +42,7 @@ AppAsset::register($this);
     } else {
         $menuItems[] = [
             'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-            'url' => ['/site/logout'],
+            'url' => ['/login/logout'],
             'linkOptions' => ['data-method' => 'post']
         ];
     }
@@ -54,9 +54,6 @@ AppAsset::register($this);
     ?>
 
     <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>
