@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\web\IdentityInterface;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "agency".
@@ -38,6 +39,7 @@ class Agency extends \yii\db\ActiveRecord  implements IdentityInterface
         return 'agency';
     }
 
+    public $image;
     /**
      * @inheritdoc
      */
@@ -50,7 +52,8 @@ class Agency extends \yii\db\ActiveRecord  implements IdentityInterface
             [['description'], 'string', 'max' => 300],
             [['contact_number', 'contact_person'], 'string', 'max' => 20],
             [['address'], 'string', 'max' => 200],
-            [['username', 'password'], 'string', 'max' => 32]
+            [['username', 'password'], 'string', 'max' => 32],
+            [['image'], 'file']
         ];
     }
 
@@ -72,11 +75,13 @@ class Agency extends \yii\db\ActiveRecord  implements IdentityInterface
             'qq' => 'qq',
             'wechat' => '微信',
             'employee_number' => '会员数目',
-            'create_time' => 'Create Time',
+            'create_time' => '创建时间',
             'username' => '登入系统名',
             'password' => '登录密码',
         ];
     }
+
+
 
     /**
      * @inheritdoc
@@ -140,4 +145,24 @@ class Agency extends \yii\db\ActiveRecord  implements IdentityInterface
         throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
     }
 
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if($insert) {
+                $this->create_time = date('Y-m-d H:i:s',time());
+            } else {
+                //$this->updated_at = time();
+            }
+            if(strlen($this->password)==32)
+            {
+                unset($this->password);
+            }else
+            {
+                $this->password=md5($this->password);
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

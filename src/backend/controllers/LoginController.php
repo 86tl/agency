@@ -53,7 +53,8 @@ class LoginController extends Controller
 
     public function actionIndex()
     {
-        return '6767';
+       $this->redirect(['/agency']);
+        return '';
     }
 
     public function actionLogin()

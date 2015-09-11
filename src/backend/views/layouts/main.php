@@ -34,17 +34,20 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/main/index']],
-    ];
+//    $menuItems = [
+//        //['label' => 'Home', 'url' => ['/main/index']],
+//        ['label' => '中介', 'url' => ['/agency/index']],
+//    ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/login/login']];
+        $menuItems[] = ['label' => '登录', 'url' => ['/login/login']];
     } else {
+        $menuItems[] =   ['label' => '中介', 'url' => ['/agency']];
+        $menuItems[] =   ['label' => '员工', 'url' => ['/employee']];
         $menuItems[] = [
-            'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+            'label' => '登出 (' . Yii::$app->user->identity->username . ')',
             'url' => ['/login/logout'],
-            'linkOptions' => ['data-method' => 'post']
-        ];
+            'linkOptions' => ['data-method' => 'post'],
+         ];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
