@@ -10,12 +10,14 @@ return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
+    'defaultRoute'=>'login/index',
     'bootstrap' => ['log'],
     'modules' => [],
     'components' => [
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'app\models\Agency',
             'enableAutoLogin' => true,
+            'loginUrl'=>['login/login'],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

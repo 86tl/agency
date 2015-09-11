@@ -1,6 +1,7 @@
 <?php
 namespace common\models;
 
+use app\models\Agency;
 use Yii;
 use yii\base\Model;
 
@@ -42,8 +43,12 @@ class LoginForm extends Model
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
-            if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+//            if (!$user || !$user->validatePassword($this->password)) {
+//                $this->addError($attribute, 'Incorrect username or password.');
+//            }
+            if($user->password != $this->password)
+            {
+                $this->addError($attribute, '用户名或者密码输入错误！');
             }
         }
     }
@@ -70,9 +75,9 @@ class LoginForm extends Model
     protected function getUser()
     {
         if ($this->_user === null) {
-            $this->_user = User::findByUsername($this->username);
+            //$this->_user = User::findByUsername($this->username);
+            $this->_user = Agency::findByUsername($this->username);
         }
-
         return $this->_user;
     }
 }

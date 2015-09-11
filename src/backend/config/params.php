@@ -1,4 +1,5 @@
 <?php
 return [
-    'adminEmail' => 'admin@example.com',
+    'company_name'=>'My Agency',
+    'powered'=>'Powered  by ???'
 ];
