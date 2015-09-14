@@ -36,7 +36,6 @@ class AgencyController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => Agency::find(),
         ]);
-
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
@@ -63,7 +62,6 @@ class AgencyController extends Controller
     {
         $model = new Agency();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $this->Upload($model);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -120,26 +118,4 @@ class AgencyController extends Controller
         }
     }
 
-    public function Upload($model)
-    {
-        if (Yii::$app->request->isPost) {
-            $image = UploadedFile::getInstance($model, 'image');
-//            if ($model->validate()) {
-//                $pic_name = 'uploads/' . md5(microtime().$image->baseName) . '.' . $image->extension;
-//                @$image->saveAs($pic_name);
-//                $model->image = $pic_name;
-//            }
-
-                $pic_name = '' . md5(microtime().$image->baseName) . '.' . $image->extension;
-                 $image->saveAs($pic_name);
-                $model->image = $pic_name;
-
-
-                print $model->image;
-                var_dump($model->getErrors());
-                exit();
-
-        }
-      return $model;
-    }
 }

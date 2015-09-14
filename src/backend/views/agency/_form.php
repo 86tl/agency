@@ -8,9 +8,9 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="agency-form">
+<div class="portlet-body form">
 
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data','class'=>'form-horizontal']]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => false]) ?>
 

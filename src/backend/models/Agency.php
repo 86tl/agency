@@ -39,7 +39,6 @@ class Agency extends \yii\db\ActiveRecord  implements IdentityInterface
         return 'agency';
     }
 
-    public $image;
     /**
      * @inheritdoc
      */
@@ -53,7 +52,7 @@ class Agency extends \yii\db\ActiveRecord  implements IdentityInterface
             [['contact_number', 'contact_person'], 'string', 'max' => 20],
             [['address'], 'string', 'max' => 200],
             [['username', 'password'], 'string', 'max' => 32],
-            [['image'], 'file']
+            [['image'], 'file','skipOnEmpty' => true]
         ];
     }
 
@@ -147,10 +146,13 @@ class Agency extends \yii\db\ActiveRecord  implements IdentityInterface
 
     public function beforeSave($insert)
     {
-        if (parent::beforeSave($insert)) {
-            if($insert) {
+        if (parent::beforeSave($insert))
+        {
+            if($insert)
+            {
                 $this->create_time = date('Y-m-d H:i:s',time());
-            } else {
+            } else
+            {
                 //$this->updated_at = time();
             }
             if(strlen($this->password)==32)
@@ -160,9 +162,28 @@ class Agency extends \yii\db\ActiveRecord  implements IdentityInterface
             {
                 $this->password=md5($this->password);
             }
+            $this->handel_upload();
             return true;
         } else {
             return false;
         }
+    }
+
+    public function handel_upload()
+    {
+        if (Yii::$app->request->isPost)
+        {
+            $image = UploadedFile::getInstance($this, 'image');
+            if($image !='')
+            {
+                $pic_name = 'uploads/' . substr(md5(microtime().$image->baseName),0,15) . '.' . $image->extension;
+                $image->saveAs($pic_name);
+                $this->image = $pic_name;
+            }else
+            {
+                unset($this->image);
+            }
+        }
+        return $this;
     }
 }
