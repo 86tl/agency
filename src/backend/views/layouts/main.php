@@ -15,7 +15,7 @@ AppAsset::register($this);
 <!-- BEGIN HEAD -->
 <head>
 <meta charset="utf-8"/>
-<title>后台管理页面   <?=$this->context->real_name?></title>
+<title>后台管理页面   <?=Yii::$app->params[backend_cates][$this->context->id];?></title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -95,14 +95,6 @@ AppAsset::register($this);
 					</ul>
 				</li>
 				<!-- END USER LOGIN DROPDOWN -->
-				<!-- BEGIN QUICK SIDEBAR TOGGLER -->
-				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-<!--				<li class="dropdown dropdown-quick-sidebar-toggler">-->
-<!--					<a href="javascript:;" class="dropdown-toggle">-->
-<!--					<i class="icon-logout"></i>-->
-<!--					</a>-->
-<!--				</li>-->
-				<!-- END QUICK SIDEBAR TOGGLER -->
 			</ul>
 		</div>
 		<!-- END TOP NAVIGATION MENU -->
@@ -134,64 +126,47 @@ AppAsset::register($this);
 					</div>
 					<!-- END SIDEBAR TOGGLER BUTTON -->
 				</li>
-				<li class="start ">
-					<a href="login.html;">
-					<i class="icon-home"></i>
-					<span class="title">Dashboard</span>
-					<span class="arrow "></span>
+                <?php foreach(Yii::$app->params['backend_cates'] as $k=>$v):?>
+				<li class="<?=($k == $this->context->id)?'active':''?>">
+					<a href="<?=Url::toRoute('/'.$k);?>">
+					<span class="title"><?=$v?></span>
 					</a>
+				</li>
+                <?php endforeach;?>
+<!--				<li>-->
+<!--					<a href="javascript:;">-->
+<!--					<i class="icon-basket"></i>-->
+<!--					<span class="title">eCommerce</span>-->
+<!--					<span class="arrow "></span>-->
+<!--					</a>-->
 <!--					<ul class="sub-menu">-->
 <!--						<li>-->
-<!--							<a href="index.html">-->
-<!--							<i class="icon-bar-chart"></i>-->
-<!--							Default Dashboard</a>-->
+<!--							<a href="ecommerce_index.html">-->
+<!--							<i class="icon-home"></i>-->
+<!--							Dashboard</a>-->
 <!--						</li>-->
 <!--						<li>-->
-<!--							<a href="index_2.html">-->
-<!--							<i class="icon-bulb"></i>-->
-<!--							New Dashboard #1</a>-->
+<!--							<a href="ecommerce_orders.html">-->
+<!--							<i class="icon-basket"></i>-->
+<!--							Orders</a>-->
 <!--						</li>-->
 <!--						<li>-->
-<!--							<a href="index_3.html">-->
-<!--							<i class="icon-graph"></i>-->
-<!--							New Dashboard #2</a>-->
+<!--							<a href="ecommerce_orders_view.html">-->
+<!--							<i class="icon-tag"></i>-->
+<!--							Order View</a>-->
+<!--						</li>-->
+<!--						<li>-->
+<!--							<a href="ecommerce_products.html">-->
+<!--							<i class="icon-handbag"></i>-->
+<!--							Products</a>-->
+<!--						</li>-->
+<!--						<li>-->
+<!--							<a href="ecommerce_products_edit.html">-->
+<!--							<i class="icon-pencil"></i>-->
+<!--							Product Edit</a>-->
 <!--						</li>-->
 <!--					</ul>-->
-				</li>
-				<li>
-					<a href="javascript:;">
-					<i class="icon-basket"></i>
-					<span class="title">eCommerce</span>
-					<span class="arrow "></span>
-					</a>
-					<ul class="sub-menu">
-						<li>
-							<a href="ecommerce_index.html">
-							<i class="icon-home"></i>
-							Dashboard</a>
-						</li>
-						<li>
-							<a href="ecommerce_orders.html">
-							<i class="icon-basket"></i>
-							Orders</a>
-						</li>
-						<li>
-							<a href="ecommerce_orders_view.html">
-							<i class="icon-tag"></i>
-							Order View</a>
-						</li>
-						<li>
-							<a href="ecommerce_products.html">
-							<i class="icon-handbag"></i>
-							Products</a>
-						</li>
-						<li>
-							<a href="ecommerce_products_edit.html">
-							<i class="icon-pencil"></i>
-							Product Edit</a>
-						</li>
-					</ul>
-				</li>
+<!--				</li>-->
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>

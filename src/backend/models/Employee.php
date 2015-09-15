@@ -8,7 +8,6 @@ use Yii;
  * This is the model class for table "employee".
  *
  * @property integer $id
- * @property integer $agency_id
  * @property integer $user_id
  * @property string $status
  * @property string $rating
@@ -29,6 +28,7 @@ use Yii;
  * @property string $last_update
  * @property string $create_time
  * @property string $image
+ * @property integer $company_id
  */
 class Employee extends \yii\db\ActiveRecord
 {
@@ -46,7 +46,7 @@ class Employee extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['agency_id', 'user_id', 'age'], 'integer'],
+            [['user_id', 'age', 'company_id'], 'integer'],
             [['last_update', 'create_time'], 'safe'],
             [['status'], 'string', 'max' => 30],
             [['rating', 'is_cleaning', 'is_housekeeper', 'is_elderlycare', 'is_matron', 'is_cook', 'is_babysitter', 'nationality', 'language'], 'string', 'max' => 10],
@@ -64,27 +64,27 @@ class Employee extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'agency_id' => 'Agency ID',
-            'user_id' => '连接user',
-            'status' => '当前状态',
-            'rating' => '总平均分数',
-            'identity_authorized' => 'Identity Authorized',
-            'mobile_authorized' => 'Mobile Authorized',
-            'service_type' => '服务类型',
-            'is_cleaning' => '是否保洁',
-            'is_housekeeper' => '是否保姆',
-            'is_elderlycare' => '是否照顾老人',
-            'is_matron' => '是否月嫂',
-            'is_cook' => '是否厨嫂',
-            'is_babysitter' => '是否育婴',
-            'intro' => '个人介绍',
-            'age' => '年龄',
-            'gender' => '性别',
+            'user_id' => 'User ID',
+            'status' => 'Status',
+            'rating' => '評分總平均分數',
+            'identity_authorized' => '实名认证',
+            'mobile_authorized' => '手机认证',
+            'service_type' => 'Service Type',
+            'is_cleaning' => '是否保潔種類 ',
+            'is_housekeeper' => '是否保姆種類',
+            'is_elderlycare' => '是否照顧老人種類',
+            'is_matron' => '是否月嫂種類',
+            'is_cook' => 'Is Cook',
+            'is_babysitter' => '是否育嬰種類',
+            'intro' => '個人介紹',
+            'age' => '年齡',
+            'gender' => '性別',
             'nationality' => '民族',
-            'language' => '语言',
-            'last_update' => '最后更新时间',
-            'create_time' => '创建时间',
+            'language' => '語言',
+            'last_update' => '最後更新時間',
+            'create_time' => '提交時間',
             'image' => '照片',
+            'company_id' => '中介公司',
         ];
     }
 }
