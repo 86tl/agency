@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-    <?php  $form = ActiveForm::begin(['options' =>['class'=>'form-horizontal'],'fieldConfig' => [
+    <?php  $form = ActiveForm::begin(['options' =>['enctype' => 'multipart/form-data','class'=>'form-horizontal'],'fieldConfig' => [
         'template' => "{label}\n<div class=\"col-md-4\">{input}</div>\n<div class=\"\">{error}</div>",
         'labelOptions' => ['class' => 'col-md-3 control-label'],
     ],]);?>
@@ -41,6 +41,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'age')->textInput() ?>
 
+    <?= $form->field($model, 'image')->fileInput() ?>
+
     <?= $form->field($model, 'gender')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'nationality')->textInput(['maxlength' => true]) ?>
@@ -50,8 +52,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'last_update')->textInput() ?>
 
     <?= $form->field($model, 'create_time')->textInput() ?>
-
-    <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'company_id')->textInput() ?>
 

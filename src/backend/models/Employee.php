@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "employee".
@@ -53,7 +54,7 @@ class Employee extends \yii\db\ActiveRecord
             [['identity_authorized', 'mobile_authorized', 'gender'], 'string', 'max' => 1],
             [['service_type'], 'string', 'max' => 20],
             [['intro'], 'string', 'max' => 255],
-            [['image'], 'string', 'max' => 64]
+            [['image'], 'file','skipOnEmpty' => true]
         ];
     }
 
@@ -65,7 +66,7 @@ class Employee extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'user_id' => 'User ID',
-            'status' => 'Status',
+            'status' => '状态',
             'rating' => '評分總平均分數',
             'identity_authorized' => '实名认证',
             'mobile_authorized' => '手机认证',
@@ -74,7 +75,7 @@ class Employee extends \yii\db\ActiveRecord
             'is_housekeeper' => '是否保姆種類',
             'is_elderlycare' => '是否照顧老人種類',
             'is_matron' => '是否月嫂種類',
-            'is_cook' => 'Is Cook',
+            'is_cook' => '是否廚嫂種類',
             'is_babysitter' => '是否育嬰種類',
             'intro' => '個人介紹',
             'age' => '年齡',
@@ -86,5 +87,41 @@ class Employee extends \yii\db\ActiveRecord
             'image' => '照片',
             'company_id' => '中介公司',
         ];
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert))
+        {
+            if($insert)
+            {
+                $this->create_time = date('Y-m-d H:i:s');
+            } else
+            {
+                $this->last_update =date('Y-m-d H:i:s');
+            }
+            $this->handel_upload();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function handel_upload()
+    {
+        if (Yii::$app->request->isPost)
+        {
+            $image = UploadedFile::getInstance($this, 'image');
+            if($image !='')
+            {
+                $pic_name = 'uploads/employee/' . substr(md5(microtime().$image->baseName),0,15) . '.' . $image->extension;
+                $image->saveAs($pic_name);
+                $this->image = $pic_name;
+            }else
+            {
+                unset($this->image);
+            }
+        }
+        return $this;
     }
 }
