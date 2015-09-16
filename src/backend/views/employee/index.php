@@ -43,7 +43,13 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'language',
             // 'last_update',
              'create_time',
-             'image',
+            [
+                'attribute' => 'image',
+                'label'=>'照片',
+                'value'=>function($model){
+                       return @web.'/'.$model->image;
+                    }
+            ],
             // 'company_id',
 
             ['class' => 'yii\grid\ActionColumn','header' => '操作'],
