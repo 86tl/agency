@@ -28,8 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'user_id',
+           // 'id',
+           // 'user_id',
             'status',
             'rating',
             'identity_authorized',
@@ -48,8 +48,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'language',
             'last_update',
             'create_time',
-            'image',
-            'company_id',
+            [
+                'attribute' => 'image',
+                'label'=>'照片',
+                'format'=>'raw',
+                'value'=>    '<a href="'.$model->image.'" target="_Blank">'.$model->image.'</a>'
+            ],
+           // 'company_id',
         ],
     ]) ?>
 

@@ -95,6 +95,7 @@ class Employee extends \yii\db\ActiveRecord
         {
             if($insert)
             {
+                $this->company_id = Yii::$app->user->identity->id;
                 $this->create_time = date('Y-m-d H:i:s');
             } else
             {
