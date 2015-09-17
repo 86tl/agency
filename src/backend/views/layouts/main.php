@@ -24,22 +24,22 @@ AppAsset::register($this);
 
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
-<link href="ext/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-<link href="ext/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
-<link href="ext/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<link href="ext/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
-<link href="ext/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
+<link href="<?=$this->context->get_path()?>/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="<?=$this->context->get_path()?>/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+<link href="<?=$this->context->get_path()?>/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="<?=$this->context->get_path()?>/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+<link href="<?=$this->context->get_path()?>/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
 <!-- END GLOBAL MANDATORY STYLES -->
 <!-- BEGIN THEME STYLES -->
-<link href="ext/global/css/components.css" id="style_components" rel="stylesheet" type="text/css"/>
-<link href="ext/global/css/plugins.css" rel="stylesheet" type="text/css"/>
-<link href="ext/admin/layout/css/layout.css" rel="stylesheet" type="text/css"/>
-<link id="style_color" href="ext/admin/layout/css/themes/darkblue.css" rel="stylesheet" type="text/css"/>
-<link href="ext/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
+<link href="<?=$this->context->get_path()?>/global/css/components.css" id="style_components" rel="stylesheet" type="text/css"/>
+<link href="<?=$this->context->get_path()?>/global/css/plugins.css" rel="stylesheet" type="text/css"/>
+<link href="<?=$this->context->get_path()?>/admin/layout/css/layout.css" rel="stylesheet" type="text/css"/>
+<link id="style_color" href="<?=$this->context->get_path()?>/admin/layout/css/themes/darkblue.css" rel="stylesheet" type="text/css"/>
+<link href="<?=$this->context->get_path()?>/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico"/>
-<script src="ext/global/plugins/jquery.min.js" type="text/javascript"></script>
-<script src="ext/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+<script src="<?=$this->context->get_path()?>/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="<?=$this->context->get_path()?>/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -60,7 +60,7 @@ AppAsset::register($this);
 		<!-- BEGIN LOGO -->
 		<div class="page-logo">
 			<a href="index.html">
-			<img src="ext/admin/layout/img/logo.png" alt="logo" class="logo-default"/>
+			<img src="<?=$this->context->get_path()?>/admin/layout/img/logo.png" alt="logo" class="logo-default"/>
 			</a>
 			<div class="menu-toggler sidebar-toggler hide">
 				<!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
@@ -78,7 +78,7 @@ AppAsset::register($this);
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
 				<li class="dropdown dropdown-user">
 					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-					<img alt="" class="img-circle" src="ext/admin/layout/img/avatar3_small.jpg"/>
+					<img alt="" class="img-circle" src="<?=$this->context->get_path()?>/admin/layout/img/avatar3_small.jpg"/>
 					<span class="username username-hide-on-mobile">
 					<?=Yii::$app->user->identity->name?> </span>
 					<i class="fa fa-angle-down"></i>
@@ -202,23 +202,23 @@ AppAsset::register($this);
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 <!-- BEGIN CORE PLUGINS -->
 <!--[if lt IE 9]>
-<script src="ext/global/plugins/respond.min.js"></script>
-<script src="ext/global/plugins/excanvas.min.js"></script> 
+<script src="<?=$this->context->get_path()?>/global/plugins/respond.min.js"></script>
+<script src="<?=$this->context->get_path()?>/global/plugins/excanvas.min.js"></script> 
 <![endif]-->
 <!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
-<script src="ext/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
-<script src="ext/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="ext/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
-<script src="ext/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-<script src="ext/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-<script src="ext/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
-<script src="ext/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
-<script src="ext/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+<script src="<?=$this->context->get_path()?>/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+<script src="<?=$this->context->get_path()?>/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="<?=$this->context->get_path()?>/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+<script src="<?=$this->context->get_path()?>/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="<?=$this->context->get_path()?>/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="<?=$this->context->get_path()?>/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+<script src="<?=$this->context->get_path()?>/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+<script src="<?=$this->context->get_path()?>/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
-<script src="ext/global/scripts/metronic.js" type="text/javascript"></script>
-<script src="ext/admin/layout/scripts/layout.js" type="text/javascript"></script>
-<script src="ext/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
-<script src="ext/admin/layout/scripts/demo.js" type="text/javascript"></script>
+<script src="<?=$this->context->get_path()?>/global/scripts/metronic.js" type="text/javascript"></script>
+<script src="<?=$this->context->get_path()?>/admin/layout/scripts/layout.js" type="text/javascript"></script>
+<script src="<?=$this->context->get_path()?>/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
+<script src="<?=$this->context->get_path()?>/admin/layout/scripts/demo.js" type="text/javascript"></script>
 <script>
       jQuery(document).ready(function() {    
          Metronic.init(); // init metronic core components

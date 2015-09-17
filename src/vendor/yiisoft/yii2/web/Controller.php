@@ -205,4 +205,10 @@ class Controller extends \yii\base\Controller
     {
         return Yii::$app->getResponse()->redirect(Yii::$app->getRequest()->getUrl() . $anchor);
     }
+
+    public function get_path()
+    {
+        return    (Yii::$app->urlManager->enablePrettyUrl)?'/ext':'./ext';
+
+    }
 }
