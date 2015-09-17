@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'claims',
             // 'balance',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn','header' => '操作'],
         ],
     ]); ?>
 

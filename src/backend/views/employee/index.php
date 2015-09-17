@@ -46,8 +46,9 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'image',
                 'label'=>'照片',
+                'format'=>'raw',
                 'value'=>function($model){
-                       return @web.'/'.$model->image;
+                       return '<a href="'.dirname(Yii::$app->getHomeUrl()).'/'.$model->image.'" target="_Blank">'.$model->image.'</a>';
                     }
             ],
             // 'company_id',

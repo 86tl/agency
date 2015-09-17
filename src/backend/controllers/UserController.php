@@ -45,6 +45,9 @@ class UserController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => User::find(),
+            'pagination' => [
+                'pagesize' => Yii::$app->params['page_size'],
+            ]
         ]);
 
         return $this->render('index', [
