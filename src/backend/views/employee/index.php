@@ -41,8 +41,8 @@ $this->params['breadcrumbs'][] = $this->title;
              'gender',
              'nationality',
             // 'language',
-            // 'last_update',
-             'create_time',
+             'last_update',
+             //'create_time',
             [
                 'attribute' => 'image',
                 'label'=>'照片',

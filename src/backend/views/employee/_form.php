@@ -13,7 +13,6 @@ use yii\widgets\ActiveForm;
         'labelOptions' => ['class' => 'col-md-3 control-label'],
     ],]);?>
 <div class="form-body">
-    <?= $form->field($model, 'user_id')->textInput() ?>
 
     <?= $form->field($model, 'status')->textInput(['maxlength' => true]) ?>
 
@@ -49,11 +48,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'language')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'last_update')->textInput() ?>
+    <?= $form->field($model, 'last_update')->textInput(['disabled'=>'true']) ?>
 
-    <?= $form->field($model, 'create_time')->textInput() ?>
+    <?= $form->field($model, 'create_time')->textInput(['disabled'=>'true']) ?>
 
-    <?= $form->field($model, 'company_id')->textInput() ?>
+<!--    --><?//= $form->field($model, 'company_id')->textInput() ?>
 
     <div class="form-actions">
         <div class="row">
