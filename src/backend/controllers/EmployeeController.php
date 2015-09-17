@@ -44,6 +44,7 @@ class EmployeeController extends Controller
      */
     public function actionIndex()
     {
+        
         $dataProvider = new ActiveDataProvider([
             'query' => Employee::find()->where(['company_id'=>Yii::$app->user->identity->id]),
         ]);
