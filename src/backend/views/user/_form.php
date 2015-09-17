@@ -52,7 +52,7 @@ use yii\widgets\ActiveForm;
     <div class="form-actions">
         <div class="row">
             <div class="col-md-offset-3 col-md-9">
-                <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success  btn-circle' : 'btn btn-primary  btn-circle']) ?>
+                <?= Html::submitButton($model->isNewRecord ? '创建' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success  btn-circle' : 'btn btn-primary  btn-circle']) ?>
             </div>
         </div>
     </div>
