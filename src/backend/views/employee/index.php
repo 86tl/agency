@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'=>'照片',
                 'format'=>'raw',
                 'value'=>function($model){
-                       return '<a href="'.$model->image.'" target="_Blank">@webroot'.$model->image.'</a>';
+                       return '<a href="'.$model->image.'" target="_Blank">'.$model->image.'</a>';
                     }
             ],
             // 'company_id',
