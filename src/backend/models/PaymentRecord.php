@@ -18,7 +18,7 @@ use Yii;
  * @property integer $account_number
  * @property string $bank_name
  * @property string $curreny
- * @property integer $amount
+ * @property string $amount
  * @property string $remarks
  * @property string $create_time
  */
@@ -38,7 +38,8 @@ class PaymentRecord extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['agency_id', 'user_id', 'employee_id', 'job_id', 'account_number', 'amount'], 'integer'],
+            [['agency_id', 'user_id', 'employee_id', 'job_id', 'account_number'], 'integer'],
+            [['amount'], 'number'],
             [['create_time'], 'safe'],
             [['alipay_id', 'payment_method', 'payment_record'], 'string', 'max' => 30],
             [['bank_name'], 'string', 'max' => 50],
@@ -54,19 +55,19 @@ class PaymentRecord extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'agency_id' => 'Agency ID',
-            'user_id' => 'User ID',
-            'employee_id' => 'Employee ID',
-            'job_id' => 'Job ID',
-            'alipay_id' => 'Alipay ID',
-            'payment_method' => 'Payment Method',
-            'payment_record' => 'Payment Record',
-            'account_number' => 'Account Number',
-            'bank_name' => 'Bank Name',
-            'curreny' => 'Curreny',
-            'amount' => 'Amount',
-            'remarks' => 'Remarks',
-            'create_time' => 'Create Time',
+            'agency_id' => '中介公司',
+            'user_id' => '用戶id',
+            'employee_id' => '員工id',
+            'job_id' => '工作id',
+            'alipay_id' => '支付寶id',
+            'payment_method' => '付款方式',
+            'payment_record' => '收據數碼',
+            'account_number' => '戶口號碼',
+            'bank_name' => '銀行名稱',
+            'curreny' => 'curreny',
+            'amount' => '款項',
+            'remarks' => '备注',
+            'create_time' => '创建时间',
         ];
     }
 }
