@@ -46,14 +46,34 @@ class EmployeeController extends Controller
     {
         
         $dataProvider = new ActiveDataProvider([
-            'query' => Employee::find()->where(['company_id'=>Yii::$app->user->identity->id]),
+            'query' => Employee::find()->where($this->handel_search()),
+            'pagination' => [
+                'pagesize' => Yii::$app->params['page_size'],
+            ]
         ]);
-
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
     }
 
+    function handel_search()
+    {
+        $arr = ['company_id'=>Yii::$app->user->identity->id];
+        if($_REQUEST['st'])
+        {
+             ($_REQUEST['status'])?$arr['status']=$_REQUEST['status']:'';
+            // ($_REQUEST['service_type'])?$arr['service_type']=$_REQUEST['service_type']:'';
+        }
+        switch($_REQUEST['st'])
+        {
+            case 1:
+                ($_REQUEST['search_input'])?$arr['name']=$_REQUEST['search_input']:'';
+            case 2:
+                ($_REQUEST['search_input'])?$arr['tel']=$_REQUEST['search_input']:'';
+                default:
+        }
+        return $arr;
+    }
     /**
      * Displays a single Employee model.
      * @param integer $id

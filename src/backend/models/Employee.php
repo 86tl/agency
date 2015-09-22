@@ -30,6 +30,8 @@ use yii\web\UploadedFile;
  * @property string $create_time
  * @property string $image
  * @property integer $company_id
+ * @property string $name
+ * * @property string $tel
  */
 class Employee extends \yii\db\ActiveRecord
 {
@@ -49,11 +51,12 @@ class Employee extends \yii\db\ActiveRecord
         return [
             [['user_id', 'age', 'company_id'], 'integer'],
             [['last_update', 'create_time'], 'safe'],
-            [['status'], 'string', 'max' => 30],
+            [['status,tel'], 'string', 'max' => 30],
             [['rating', 'is_cleaning', 'is_housekeeper', 'is_elderlycare', 'is_matron', 'is_cook', 'is_babysitter', 'nationality', 'language'], 'string', 'max' => 10],
             [['identity_authorized', 'mobile_authorized', 'gender'], 'string', 'max' => 1],
             [['service_type'], 'string', 'max' => 20],
             [['intro'], 'string', 'max' => 255],
+            [['name'], 'string', 'max' => 50],
             [['image'], 'file','skipOnEmpty' => true]
         ];
     }
@@ -66,6 +69,7 @@ class Employee extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'user_id' => 'User ID',
+            'name'=>'名称',
             'status' => '状态',
             'rating' => '評分總平均分數',
             'identity_authorized' => '实名认证',

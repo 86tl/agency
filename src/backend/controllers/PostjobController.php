@@ -4,7 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use app\models\PostJob;
-use yii\data\ActiveDataProvider;
+use app\models\PostJobsearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -43,14 +43,11 @@ class PostjobController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => PostJob::find(),
-            'pagination' => [
-                'pagesize' => Yii::$app->params['page_size'],
-            ]
-        ]);
+        $searchModel = new PostJobsearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
