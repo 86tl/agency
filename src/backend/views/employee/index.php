@@ -30,6 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         </select>
                     </td>
                     <td>
+                        &nbsp;  &nbsp;  &nbsp;
+                    </td>
+                    <td>
                         <select class="select_type form-control">
                             <option value="-1">选择工作种类</option>
                             <?foreach(Yii::$app->params['empl_type'] as $k=>$v):?>
@@ -38,8 +41,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         </select>
                     </td>
                     <td>
+                        &nbsp;  &nbsp;  &nbsp;
+                    </td>
+                    <td>
                         <input type="text" class="user_value">
                         <a href="<?=Url::toRoute(['index','st'=>'1']);?>" class="btn green searchname">搜索员工 </a>
+                    </td>
+                    <td>
+                        &nbsp;  &nbsp;  &nbsp;
                     </td>
                     <td>
                         <input type="text" class="tel_value">
