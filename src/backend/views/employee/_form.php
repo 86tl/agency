@@ -13,40 +13,42 @@ use yii\widgets\ActiveForm;
         'labelOptions' => ['class' => 'col-md-3 control-label'],
     ],]);?>
 <div class="form-body">
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'tel')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'rating')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'identity_authorized')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'mobile_authorized')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'service_type')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'is_cleaning')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'is_housekeeper')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'is_elderlycare')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'is_matron')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'is_cook')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'is_babysitter')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'intro')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'intro')->textarea(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'age')->textInput() ?>
 
     <?= $form->field($model, 'image')->fileInput() ?>
 
-    <?= $form->field($model, 'gender')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'gender')->dropDownList(Yii::$app->params['empl_sex_flag'],['prompt'=>'请选择']) ?>
 
-    <?= $form->field($model, 'nationality')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'nationality')->dropDownList(Yii::$app->params['empl_nation'],['prompt'=>'请选择']) ?>
 
-    <?= $form->field($model, 'language')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'language')->checkboxList(Yii::$app->params['empl_lan']) ?>
+
+    <?= $form->field($model, 'status')->dropDownList(Yii::$app->params['empl_status'],['prompt'=>'请选择']) ?>
+
+    <?= $form->field($model, 'rating')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'identity_authorized')->dropDownList(Yii::$app->params['empl_yn_flag'],['prompt'=>'请选择']) ?>
+
+    <?= $form->field($model, 'mobile_authorized')->dropDownList(Yii::$app->params['empl_yn_flag'],['prompt'=>'请选择']) ?>
+
+
+    <?= $form->field($model, 'is_cleaning',['labelOptions' => ['class' => 'col-md-3 control-label my-line-height']])->checkbox([],$enclosedByLabel=false) ?>
+
+    <?= $form->field($model, 'is_housekeeper',['labelOptions' => ['class' => 'col-md-3 control-label my-line-height']])->checkbox([],$enclosedByLabel=false) ?>
+
+    <?= $form->field($model, 'is_elderlycare',['labelOptions' => ['class' => 'col-md-3 control-label my-line-height']])->checkbox([],$enclosedByLabel=false) ?>
+
+    <?= $form->field($model, 'is_matron',['labelOptions' => ['class' => 'col-md-3 control-label my-line-height']])->checkbox([],$enclosedByLabel=false) ?>
+
+    <?= $form->field($model, 'is_cook',['labelOptions' => ['class' => 'col-md-3 control-label my-line-height']])->checkbox([],$enclosedByLabel=false) ?>
+
+    <?= $form->field($model, 'is_babysitter',['labelOptions' => ['class' => 'col-md-3 control-label my-line-height']])->checkbox([],$enclosedByLabel=false) ?>
 
     <?= $form->field($model, 'last_update')->textInput(['disabled'=>'true']) ?>
 

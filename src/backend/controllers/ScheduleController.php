@@ -3,20 +3,18 @@
 namespace backend\controllers;
 
 use Yii;
-use app\models\Employee;
+use app\models\Schedule;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
 
 /**
- * EmployeeController implements the CRUD actions for Employee model.
+ * ScheduleController implements the CRUD actions for Schedule model.
  */
-class EmployeeController extends Controller
+class ScheduleController extends Controller
 {
-    public $enableCsrfValidation = false;
     public function behaviors()
     {
         return [
@@ -40,45 +38,25 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Lists all Employee models.
+     * Lists all Schedule models.
      * @return mixed
      */
     public function actionIndex()
     {
-        
         $dataProvider = new ActiveDataProvider([
-            'query' => Employee::find()->where($this->handel_search()),
+            'query' => Schedule::find(),
             'pagination' => [
                 'pagesize' => Yii::$app->params['page_size'],
             ]
         ]);
+
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
     }
 
-    function handel_search()
-    {
-        $arr = ['company_id'=>Yii::$app->user->identity->id];
-        if($_REQUEST['st'])
-        {
-             ($_REQUEST['status'])?$arr['status']=$_REQUEST['status']:'';
-             ($_REQUEST['service_type'])?$arr[Yii::$app->params['empl_type_real'][$_REQUEST['service_type']]]=1:'';
-        }
-        switch($_REQUEST['st'])
-        {
-            case 1:
-                ($_REQUEST['search_input'])?$arr['name']=$_REQUEST['search_input']:'';
-                break;
-            case 2:
-                ($_REQUEST['search_input'])?$arr['tel']=$_REQUEST['search_input']:'';
-                break;
-                default:
-        }
-        return $arr;
-    }
     /**
-     * Displays a single Employee model.
+     * Displays a single Schedule model.
      * @param integer $id
      * @return mixed
      */
@@ -90,16 +68,16 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Creates a new Employee model.
+     * Creates a new Schedule model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Employee();
+        $model = new Schedule();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['update', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -108,7 +86,7 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Updates an existing Employee model.
+     * Updates an existing Schedule model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -118,7 +96,7 @@ class EmployeeController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['update', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -127,32 +105,31 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Deletes an existing Employee model.
+     * Deletes an existing Schedule model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
     {
-
         $this->findModel($id)->delete();
+
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Employee model based on its primary key value.
+     * Finds the Schedule model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Employee the loaded model
+     * @return Schedule the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Employee::findOne($id)) !== null) {
+        if (($model = Schedule::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-
 }

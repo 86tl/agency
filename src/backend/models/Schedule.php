@@ -43,12 +43,12 @@ class Schedule extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'job_id' => 'Job ID',
-            'user_id' => 'User ID',
-            'agency_id' => 'Agency ID',
-            'employee_id' => 'Employee ID',
-            'create_time' => 'Create Time',
-            'update_time' => 'Update Time',
+            'job_id' => '工作ID',
+            'user_id' => '用戶ID',
+            'agency_id' => '中介',
+            'employee_id' => '僱員ID',
+            'create_time' => '创建时间',
+            'update_time' => '最后更新',
         ];
     }
 }

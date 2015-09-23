@@ -54,32 +54,49 @@ $this->params['breadcrumbs'][] = $this->title;
         'layout'=>"<div class='wrap'>{summary}{pager}</div>{items}\n<div class='wrap'>{summary}{pager}</div>",
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            //'id'
-            'name',
+            [
+                'label'=>'姓名',
+                'format'=>'raw',
+                'value'=>function($model)
+                    {
+                        return $model->name;
+                    },
+            ],
             [
                 'label'=>'工作种类',
                 'format'=>'raw',
                 'value'=>function($model){
-                        return '<a href="'.$model->image.'" target="_Blank">'.$model->id.'</a>';
+                        foreach(Yii::$app->params['empl_type_real'] as $k=> $v)
+                        {
+                            if($model[$v]==1)
+                            {
+                                $s .=Yii::$app->params['empl_type'][$k].' ';
+                            }
+                        }
+                        return $s;
+
                     }
             ],
             //'user_id',
-            'status',
-            //'rating',
-            //'identity_authorized',
-            // 'mobile_authorized',
-            // 'service_type',
-            // 'is_cleaning',
-            // 'is_housekeeper',
-            // 'is_elderlycare',
-            // 'is_matron',
-            // 'is_cook',
-            // 'is_babysitter',
-            // 'intro',
+            [
+                'label'=>'状态',
+                'format'=>'raw',
+                'value'=>function($model){
+                        return Yii::$app->params['empl_status'][$model->status];
+                    }
+            ],
              'age',
-             //'gender',
-             //'nationality',
-             'language',
+            [
+                'label'=>'语言',
+                'format'=>'text',
+                'value'=>function($model){
+                       foreach($model->language as $v)
+                       {
+                           $s .=Yii::$app->params['empl_lan'][$v].' ';
+                       }
+                        return $s;
+                    }
+            ],
              'last_update',
              //'create_time',
 //            [
@@ -91,8 +108,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //                    }
 //            ],
             // 'company_id',
-
-            ['class' => 'yii\grid\ActionColumn','header' => '操作'],
+            ['class' => 'yii\grid\ActionColumn','header' => '操作','template'=>'{update} {delete}'],
         ],
     ]); ?>
     </div>

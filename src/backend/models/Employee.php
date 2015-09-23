@@ -31,7 +31,7 @@ use yii\web\UploadedFile;
  * @property string $image
  * @property integer $company_id
  * @property string $name
- * * @property string $tel
+ *  @property string $tel
  */
 class Employee extends \yii\db\ActiveRecord
 {
@@ -51,8 +51,8 @@ class Employee extends \yii\db\ActiveRecord
         return [
             [['user_id', 'age', 'company_id'], 'integer'],
             [['last_update', 'create_time'], 'safe'],
-            [['status,tel'], 'string', 'max' => 30],
-            [['rating', 'is_cleaning', 'is_housekeeper', 'is_elderlycare', 'is_matron', 'is_cook', 'is_babysitter', 'nationality', 'language'], 'string', 'max' => 10],
+            [['status','tel'], 'string', 'max' => 30],
+            [['rating', 'is_cleaning', 'is_housekeeper', 'is_elderlycare', 'is_matron', 'is_cook', 'is_babysitter', 'nationality',], 'string', 'max' => 10],
             [['identity_authorized', 'mobile_authorized', 'gender'], 'string', 'max' => 1],
             [['service_type'], 'string', 'max' => 20],
             [['intro'], 'string', 'max' => 255],
@@ -71,6 +71,7 @@ class Employee extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'name'=>'名称',
             'status' => '状态',
+            'tel'=>'电话',
             'rating' => '評分總平均分數',
             'identity_authorized' => '实名认证',
             'mobile_authorized' => '手机认证',
@@ -103,8 +104,9 @@ class Employee extends \yii\db\ActiveRecord
                 $this->create_time = date('Y-m-d H:i:s');
             } else
             {
-                $this->last_update =date('Y-m-d H:i:s');
             }
+            $this->last_update =date('Y-m-d H:i:s');
+            $this->language = implode(',',$_REQUEST["Employee"]['language']);
             $this->handel_upload();
             return true;
         } else {
@@ -128,5 +130,11 @@ class Employee extends \yii\db\ActiveRecord
             }
         }
         return $this;
+    }
+
+    public function afterfind()
+    {
+        parent::afterFind();
+        $this->language = explode(',',$this->language);
     }
 }
