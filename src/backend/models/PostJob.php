@@ -81,11 +81,11 @@ class PostJob extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'id' => '工作编号',
             'user_id' => '連接user ID',
             'mobile' => '手机',
             'topic' => '工作標題',
-            'job_status' => '已付款',
+            'job_status' => '工作状态',
             'payment_id' => '付款id',
             'service_type' => 'Service Type',
             'intro' => '服務簡介',

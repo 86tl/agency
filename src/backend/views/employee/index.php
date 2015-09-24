@@ -59,7 +59,6 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'layout'=>"<div class='wrap'>{summary}{pager}</div>{items}\n<div class='wrap'>{summary}{pager}</div>",
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
@@ -122,22 +121,6 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
     </div>
 </div>
-<script>
- $('.searchname,.searchtel').click(
-     function(){
-         var url = $(this).attr('href');
-         if($('.select_status').val() !=-1)
-         {
-             url=url+'&status='+$('.select_status').val();
-         }
-         if($('.select_type').val() !=-1)
-         {
-             url= url+"&service_type="+$('.select_type').val();
-         }
-           url = url+'&search_input='+$(this).prev().val();
-         location.href = url;
-         return false;
-     });
+<script src="<?=$this->context->get_path()?>/custom/search.js" type="text/javascript"></script>
 
-</script>
 

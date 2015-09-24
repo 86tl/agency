@@ -42,12 +42,11 @@ class Schedule extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'id' => '编号',
             'job_id' => '工作ID',
             'user_id' => '用戶ID',
             'agency_id' => '中介',
             'employee_id' => '僱員ID',
-            'create_time' => '创建时间',
             'update_time' => '最后更新',
         ];
     }

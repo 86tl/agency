@@ -2,9 +2,10 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
+use  app\models\User;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\PostJobsearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Post Jobs';
@@ -14,61 +15,68 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="mytitle">
         <?= Yii::$app->params[backend_cates][$this->context->id];?>
     </div>
-    <div class="portlet-body form">
-        <div >
-            <?= Html::a('创建新的数据 ', ['create'], ['class' => 'btn btn-success red']) ?>
-        </div>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+<!--    <div class="portlet-body form">-->
+<!--        <div >-->
+<!--            --><?//= Html::a('创建新的数据 ', ['create'], ['class' => 'btn btn-success red']) ?>
+<!--        </div>-->
+    <div class="">
+        <table>
+            <tr>
+                <td>
+                    <select class="select_type form-control">
+                        <option value="-1">选择工作种类</option>
+                        <?foreach(Yii::$app->params['empl_type'] as $k=>$v):?>
+                            <option value="<?=$k?>"><?=$v?></option>
+                        <?endforeach;?>
+                    </select>
+                </td>
+                <td>
+                    &nbsp;  &nbsp;  &nbsp;
+                </td>
+                <td>
+                    <input type="text" class="tel_value">
+                    <a href="<?=Url::toRoute(['index','st'=>'2']);?>" class="btn green searchtel">搜索电话 </a>
+                </td>
+            </tr>
+        </table>
+    </div>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        'layout'=>"<div class='wrap'>{summary}{pager}</div>{items}\n<div class='wrap'>{summary}{pager}</div>",
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
             'id',
-            'user_id',
-            'mobile',
+            [
+                'label'=>'客户',
+                'format'=>'raw',
+                'value'=>function($model){
+                        return  User::findOne($model->user_id)['display_name'];
+                    }
+            ],
+           'mobile',
+            [
+                'label'=>'工作种类',
+                'format'=>'raw',
+                'value'=>function($model){
+                        return  Yii::$app->params['empl_type'][$model->service_type] ;
+                    }
+            ],
             'topic',
             'job_status',
-            // 'payment_id',
-            // 'service_type',
-            // 'intro',
-            // 'view_time',
-            // 'week',
-            // 'period',
-            // 'city',
-            // 'province',
-            // 'district',
-            // 'address',
-            // 'create_time',
-            // 'term_period',
-            // 'cleaning_type',
-            // 'cleaning_pet_type',
-            // 'work_times',
-            // 'workingdays_perweek',
-            // 'cleaning_time_estimate',
-            // 'estimated_date',
-            // 'cleaning_size',
-            // 'beginning_date',
-            // 'end_date',
-            // 'beginning_time',
-            // 'end_time',
-            // 'worker',
-            // 'price_range',
-            // 'stay_type',
-            // 'sex_type',
-            // 'cure_type',
-            // 'baby_age_type',
-            // 'number_family',
-            // 'food_type',
-            // 'baby_type',
-            // 'longitude',
-            // 'latitude',
-
-            ['class' => 'yii\grid\ActionColumn','header' => '操作'],
-        ],
+             'district',
+             'address',
+            'beginning_time',
+            [
+                'label'=>'工作种类',
+                'format'=>'raw',
+                'value'=>function($model){
+                        return  '付款记录' ;
+                    }
+            ],
+]
     ]); ?>
 
     </div>
 </div>
+<script src="<?=$this->context->get_path()?>/custom/search.js" type="text/javascript"></script>
+
