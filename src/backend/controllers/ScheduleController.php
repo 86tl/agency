@@ -9,6 +9,8 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\PostJob;
+use app\models\Employee;
 
 /**
  * ScheduleController implements the CRUD actions for Schedule model.
@@ -44,7 +46,7 @@ class ScheduleController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Schedule::find(),
+            'query' => $this->handel_search(),
             'pagination' => [
                 'pagesize' => Yii::$app->params['page_size'],
             ]
@@ -54,6 +56,48 @@ class ScheduleController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+
+    /**
+     * @return array
+     * handel search conditions
+     */
+    function handel_search()
+    {
+        $query= Schedule::find();
+        switch($_REQUEST['st'])
+        {
+            case 1:
+                ($_REQUEST['search_input'])?$arr['employee_id']=Employee::findOne(['name'=>$_REQUEST['search_input']])->id:'';   //search  employee name
+                break;
+            case 2:
+                //($_REQUEST['search_input'])?$arr['mobile']=$_REQUEST['search_input']:'';
+                ($_REQUEST['search_input']) ?$condition['mobile'] = $_REQUEST['search_input']:'';
+                break;
+            default:
+        }
+        $query->where($arr);
+        if($_REQUEST['st'])
+        {
+            //($_REQUEST['status'])?$arr['job_id']=PostJob::findOne(['job_status'=>$_REQUEST['status']])->id:'';      //search job status
+            // ($_REQUEST['service_type'])?$arr['job_id']=$_REQUEST['service_type']:'';                //search service_type
+            ($_REQUEST['status']) ?$condition['job_status'] = $_REQUEST['status']:'';
+            ($_REQUEST['service_type']) ?$condition['service_type'] = $_REQUEST['service_type']:'';
+            $res = PostJob::find()->where($condition)->all();
+            if(count($res)>0)
+            {
+                foreach($res as $k=>$v)
+                {
+                    $ids[]=$v->id;
+                }
+               $query->andWhere(['in', 'job_id', $ids]);
+            }else
+            {
+                $query->andWhere(['job_id'=>'-1']);
+            }
+        }
+        return $query;
+    }
+
 
     /**
      * Displays a single Schedule model.

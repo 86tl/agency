@@ -48,6 +48,7 @@ class Schedule extends \yii\db\ActiveRecord
             'agency_id' => '中介',
             'employee_id' => '僱員ID',
             'update_time' => '最后更新',
+            'update_time' => '创建时间',
         ];
     }
 }
