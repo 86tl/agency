@@ -75,6 +75,7 @@ class ScheduleController extends Controller
                 break;
             default:
         }
+        $arr['agency_id'] = Yii::$app->user->identity->id;
         $query->where($arr);
         if($_REQUEST['st'])
         {
