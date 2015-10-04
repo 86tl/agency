@@ -15,10 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="mytitle">
         <?= Yii::$app->params[backend_cates][$this->context->id];?>
     </div>
-<!--    <div class="portlet-body form">-->
-<!--        <div >-->
-<!--            --><?//= Html::a('创建新的数据 ', ['create'], ['class' => 'btn btn-success red']) ?>
-<!--        </div>-->
     <div class="">
         <table>
             <tr>
@@ -54,23 +50,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
             ],
            'mobile',
-            [
-                'label'=>'工作种类',
-                'format'=>'raw',
-                'value'=>function($model){
-                        return  Yii::$app->params['empl_type'][$model->service_type] ;
-                    }
-            ],
             'topic',
-            'job_status',
              'district',
              'address',
             'beginning_time',
             [
-                'label'=>'工作种类',
+                'label'=>'操作',
                 'format'=>'raw',
                 'value'=>function($model){
-                        return  '付款记录' ;
+                        return  '<a href="'.Url::toRoute(['details','id'=>$model->id]).'" ><span class="label label-sm label-success">详情/接单</span></a>';
                     }
             ],
 ]

@@ -2,8 +2,12 @@
 
 namespace backend\controllers;
 
+use app\models\User;
+use Symfony\Component\Security\Acl\Exception\Exception;
 use Yii;
 use app\models\PostJob;
+use app\models\Employee;
+use app\models\Schedule;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -75,6 +79,7 @@ class PostjobController extends Controller
                 break;
             default:
         }
+        $arr['job_status']=0;
         return $arr;
     }
 
@@ -138,6 +143,70 @@ class PostjobController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    /**
+     * @param $id
+     * @return \yii\web\Response
+     */
+    public function actionDetails($id)
+    {
+        $model = $this->findModel($id);
+        $dataProvider = new ActiveDataProvider([
+            'query' => Employee::find(),
+            'pagination' => [
+                'pagesize' => Yii::$app->params['page_size'],
+            ]
+        ]);
+        return $this->render('details', [
+            'model' => $model,
+            'dataProvider' => $dataProvider
+        ]);
+    }
+
+
+    public function actionAssign($job_id,$employee_id)
+    {
+        $ids = explode(',',$_REQUEST[employee_id]);
+        if(count($ids)>1)
+        {
+            foreach($ids as $v)
+           {
+              $res=$this->save_data($job_id,$v);
+            }
+        }else
+         {
+            $res=$this->save_data($job_id,$employee_id);
+         }
+         if($res)
+         {
+             $res = PostJob::findOne($job_id);
+             $res->job_status='1';
+             $res->save();
+             //var_dump($res->getErrors());
+         }
+        $this->redirect(['index']);
+    }
+
+    function save_data($job_id,$employee_id)
+    {
+        try
+        {
+            $sh = new Schedule();
+            $user_id = PostJob::findOne($job_id)->user_id;
+            $sh->job_id = $job_id;
+            $sh->employee_id = $employee_id;
+            $sh->create_time = date('Y-m-d H:i:s');
+            $sh->update_time = date('Y-m-d H:i:s');
+            $sh->agency_id = Yii::$app->user->identity->id;
+            $sh->user_id = $user_id;
+            $res = $sh->save();
+            return $res;
+        }catch(Exception $e)
+        {
+            return false;
+        }
+
     }
 
     /**

@@ -29,3 +29,10 @@
 {
     line-height:2px
 }
+
+.my_display_left
+{
+    padding-left: 0px;
+}
+
+.clearfix{clear:both;}
