@@ -36,6 +36,7 @@ use Yii;
  * @property string $beginning_time
  * @property string $end_time
  * @property integer $worker
+ * @property integer $price
  * @property integer $price_range
  * @property string $stay_type
  * @property string $sex_type
@@ -46,6 +47,8 @@ use Yii;
  * @property string $baby_type
  * @property string $longitude
  * @property string $latitude
+ * @property string $locallongitude
+ * @property string $locallatitude
  */
 class PostJob extends \yii\db\ActiveRecord
 {
@@ -63,15 +66,16 @@ class PostJob extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'payment_id', 'worker', 'price_range', 'number_family'], 'integer'],
+            [['user_id', 'payment_id', 'worker', 'price', 'price_range', 'number_family'], 'integer'],
             [['create_time', 'beginning_date', 'end_date'], 'safe'],
             [['mobile'], 'string', 'max' => 40],
             [['topic', 'period', 'address', 'cleaning_pet_type'], 'string', 'max' => 100],
             [['job_status', 'view_time', 'city', 'province', 'district', 'beginning_time', 'end_time'], 'string', 'max' => 30],
             [['service_type', 'term_period', 'cleaning_size', 'stay_type', 'sex_type', 'cure_type', 'baby_age_type', 'food_type', 'baby_type'], 'string', 'max' => 10],
             [['intro'], 'string', 'max' => 255],
-            [['week', 'work_times', 'workingdays_perweek', 'cleaning_time_estimate', 'estimated_date'], 'string', 'max' => 50],
-            [['cleaning_type', 'longitude', 'latitude'], 'string', 'max' => 20]
+            [['week', 'work_times', 'workingdays_perweek', 'cleaning_time_estimate', 'estimated_date', 'locallongitude', 'locallatitude'], 'string', 'max' => 50],
+            [['cleaning_type'], 'string', 'max' => 80],
+            [['longitude', 'latitude'], 'string', 'max' => 20]
         ];
     }
 
@@ -81,7 +85,7 @@ class PostJob extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => '工作编号',
+            'id' => 'ID',
             'user_id' => '連接user ID',
             'mobile' => '手机',
             'topic' => '工作標題',
@@ -110,6 +114,7 @@ class PostJob extends \yii\db\ActiveRecord
             'beginning_time' => '起始日期',
             'end_time' => '结束日期',
             'worker' => '工人數目',
+            'price' => '薪金',
             'price_range' => '心理價位',
             'stay_type' => '住家/不住家',
             'sex_type' => '男人/女人',
@@ -120,6 +125,8 @@ class PostJob extends \yii\db\ActiveRecord
             'baby_type' => '男嬰/女嬰',
             'longitude' => '經度',
             'latitude' => '緯度',
+            'locallongitude' => '現在經度',
+            'locallatitude' => '現在緯度',
         ];
     }
 }

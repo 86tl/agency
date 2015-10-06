@@ -7,12 +7,12 @@ use yii\widgets\ActiveForm;
 ?>
 <div id="msg">
     <div id="topper_msg">
-       <div style="color: red;font-size: 16px">
-            <?=$model->id?>
+       <div style="color: red;font-size: 16px;">
+            工作编号:<?=$model->id?>
             </div>
             <div class="col-md-6 my_display_left">
                 <div class="col-md-3 my_display_left">工作种类:</div>
-                <div class="col-md-3">222</div>
+                <div class="col-md-3"><?=Yii::$app->params['empl_type'][$model->service_type]?></div>
             </div>
             <div class="col-md-6">
                 <div class="col-md-3">附加信息</div>
@@ -20,45 +20,55 @@ use yii\widgets\ActiveForm;
             </div>
             <div class="col-md-6 my_display_left">
                 <div class="col-md-3 my_display_left">开工日期:</div>
-                <div class="col-md-3">222</div>
+                <div class="col-md-3"><?=$model->beginning_date?></div>
             </div>
             <div class="col-md-6">
                 <div class="col-md-3">时间:</div>
-                <div class="col-md-3">222</div>
+                <div class="col-md-3"><?=$model->beginning_time?></div>
             </div>
             <div class="col-md-6 my_display_left">
                 <div class="col-md-3 my_display_left">宝宝年龄:</div>
-                <div class="col-md-3">222</div>
+                <div class="col-md-3"><?=Yii::$app->params['baby_age_type'][$model->baby_age_type]?></div>
             </div>
             <div class="col-md-6">
                 <div class="col-md-3">每周:</div>
-                <div class="col-md-3">222</div>
+                <div class="col-md-3"><?=$model->week?></div>
             </div>
             <div class="col-md-6 my_display_left">
                 <div class="col-md-3 my_display_left">预产期:</div>
-                <div class="col-md-3">222</div>
+                <div class="col-md-3"><?=$model->estimated_date?></div>
             </div>
             <div class="col-md-6">
                 <div class="col-md-3">面积大小:</div>
-                <div class="col-md-3">222</div>
+                <div class="col-md-3"><?=$model->cleaning_size?></div>
             </div>
     </div>
 
     <div class="col-md-12" style="margin: 10px 0px;height: 1px;border:1px solid #ddd;"></div>
-    <div id="upper_msg">
-        <div class="col-md-6 my_display_left">
-            <div class="col-md-3 my_display_left">地区:</div>
-            <div class="col-md-3">222</div>
-        </div>
-        <div class="col-md-6">
-            <div class="col-md-3">地址:</div>
-            <div class="col-md-3">222</div>
-        </div>
-        <div class="col-md-6 my_display_left">
-            <div class="col-md-3 my_display_left">地址:</div>
-            <div class="col-md-3">222</div>
-        </div>
-    </div>
+        <div id="lower_msg" >
+            <div class="col-md-12 my_display_left">
+                <div class="col-md-6 my_display_left">
+                    <div class="col-md-3 my_display_left">地区:</div>
+                    <div class="col-md-2"><?=$model->district?></div>
+                </div>
+            </div>
+            <div class="col-md-12 my_display_left">
+                <div class="col-md-6 my_display_left">
+                    <div class="col-md-3 my_display_left">地址:</div>
+                    <div class="col-md-2"><?=$model->address?></div>
+                 </div>
+            </div>
+            <div class="col-md-12 my_display_left">
+                <div class="col-md-6 my_display_left">
+                    <div class="col-md-3 my_display_left">距离:</div>
+                    <div class="col-md-2">xxxx:</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-3" style="font-size: 22px;" >薪金:<?=$model->price?></div>
+                    <div class="col-md-3"  style="font-size: 19px;">(时薪:<?=$model->price_range?>)</div>
+                </div>
+             </div>
+     </div>
  </div>
 <?php $flag=($model->worker>=2)?1:0;?>
 <div class="clearfix">
