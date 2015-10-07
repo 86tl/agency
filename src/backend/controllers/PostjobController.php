@@ -48,7 +48,7 @@ class PostjobController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => PostJob::find()->where($this->handel_search()),
+            'query' => $this->handel_search(),
             'pagination' => [
                 'pagesize' => Yii::$app->params['page_size'],
             ]
@@ -65,6 +65,7 @@ class PostjobController extends Controller
      */
     function handel_search()
     {
+        $query =  PostJob::find();
         if($_REQUEST['st'])
         {
             ($_REQUEST['service_type'])?$arr['service_type']=$_REQUEST['service_type']:'';
@@ -80,7 +81,23 @@ class PostjobController extends Controller
             default:
         }
         $arr['job_status']=0;
-        return $arr;
+        $query->where($arr);
+        $raw_district = Yii::$app->user->identity->district;
+        if(strlen($raw_district)<=3)
+        {
+            $query->andWhere(['district'=>$raw_district]);
+        }else
+        {
+            $dists= explode(',',$raw_district);
+            $temp_arr[] = 'or';
+            foreach($dists as $v)
+            {
+                //$query->orWhere(['district'=>$v]);
+                $temp_arr[]='district="'.$v.'"';
+            }
+            $query->andWhere($temp_arr);
+        }
+        return $query;
     }
 
     /**

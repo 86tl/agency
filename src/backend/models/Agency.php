@@ -26,6 +26,7 @@ use yii\web\UploadedFile;
  * @property string $password
  * @property integer $status
  * @property string $auth_key
+ * @property string $district
  */
 class Agency extends \yii\db\ActiveRecord  implements IdentityInterface
 {
@@ -52,7 +53,8 @@ class Agency extends \yii\db\ActiveRecord  implements IdentityInterface
             [['contact_number', 'contact_person'], 'string', 'max' => 20],
             [['address'], 'string', 'max' => 200],
             [['username', 'password'], 'string', 'max' => 32],
-            [['image'], 'file','skipOnEmpty' => true]
+            [['image'], 'file','skipOnEmpty' => true],
+            [['district'], 'string', 'max' => 64]
         ];
     }
 
@@ -77,6 +79,7 @@ class Agency extends \yii\db\ActiveRecord  implements IdentityInterface
             'create_time' => '创建时间',
             'username' => '登入系统名',
             'password' => '登录密码',
+            'district' => '工作区域',
         ];
     }
 
