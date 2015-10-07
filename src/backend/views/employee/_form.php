@@ -29,6 +29,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'language')->checkboxList(Yii::$app->params['empl_lan']) ?>
 
+    <?= $form->field($model, 'expected_salary')->textInput() ?>
+
     <?= $form->field($model, 'status')->dropDownList(Yii::$app->params['empl_status'],['prompt'=>'请选择']) ?>
 
     <?= $form->field($model, 'rating')->textInput(['maxlength' => true]) ?>

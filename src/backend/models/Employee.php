@@ -29,7 +29,7 @@ use yii\web\UploadedFile;
  * @property string $last_update
  * @property string $create_time
  * @property string $image
- * @property integer $company_id
+ * @property integer $expected_salary
  * @property string $name
  *  @property string $tel
  */
@@ -49,7 +49,7 @@ class Employee extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'age', 'company_id'], 'integer'],
+            [['user_id', 'age', 'company_id','expected_salary'], 'integer'],
             [['last_update', 'create_time'], 'safe'],
             [['status','tel'], 'string', 'max' => 30],
             [['rating', 'is_cleaning', 'is_housekeeper', 'is_elderlycare', 'is_matron', 'is_cook', 'is_babysitter', 'nationality',], 'string', 'max' => 10],
@@ -91,6 +91,7 @@ class Employee extends \yii\db\ActiveRecord
             'create_time' => '提交時間',
             'image' => '照片',
             'company_id' => '中介公司',
+            'expected_salary' => '期望薪水',
         ];
     }
 
@@ -106,7 +107,13 @@ class Employee extends \yii\db\ActiveRecord
             {
             }
             $this->last_update =date('Y-m-d H:i:s');
-            $this->language = implode(',',$_REQUEST["Employee"]['language']);
+            if($_REQUEST["Employee"]['language'] != '')
+            {
+                $this->language = implode(',',$_REQUEST["Employee"]['language']);
+            }else
+            {
+                $this->language=null;
+            }
             $this->handel_upload();
             return true;
         } else {
