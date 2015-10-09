@@ -2,7 +2,7 @@
 return [
     'company_name'=>'My Agency',
     'powered'=>'Powered  by ???',
-    'backend_cates'=>['employee'=>'中介员工管理','schedule'=>'中介工作管理','postjob'=>'新工作'],
+    'backend_cates'=>['employee'=>'中介员工管理','schedule'=>'已经分配的工作','postjob'=>'新工作'],
     'page_size'=>8,
     'empl_status'=>[1=>'可编配','2'=>'需要协调时间','3'=>'时间已满','4'=>'暂停编配'],
     'job_status'=>[0=>'未安排',1=>'已分配'],
