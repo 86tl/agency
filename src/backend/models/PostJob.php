@@ -49,6 +49,7 @@ use Yii;
  * @property string $latitude
  * @property string $locallongitude
  * @property string $locallatitude
+ *  @property string $employee_id
  */
 class PostJob extends \yii\db\ActiveRecord
 {
@@ -70,7 +71,7 @@ class PostJob extends \yii\db\ActiveRecord
             [['create_time', 'beginning_date', 'end_date'], 'safe'],
             [['mobile'], 'string', 'max' => 40],
             [['topic', 'period', 'address', 'cleaning_pet_type'], 'string', 'max' => 100],
-            [['job_status', 'view_time', 'city', 'province', 'district', 'beginning_time', 'end_time'], 'string', 'max' => 30],
+            [['job_status', 'view_time', 'city', 'province', 'district', 'beginning_time', 'end_time','employee_id'], 'string', 'max' => 30],
             [['service_type', 'term_period', 'cleaning_size', 'stay_type', 'sex_type', 'cure_type', 'baby_age_type', 'food_type', 'baby_type'], 'string', 'max' => 10],
             [['intro'], 'string', 'max' => 255],
             [['week', 'work_times', 'workingdays_perweek', 'cleaning_time_estimate', 'estimated_date', 'locallongitude', 'locallatitude'], 'string', 'max' => 50],

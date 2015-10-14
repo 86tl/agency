@@ -84,13 +84,13 @@ AppAsset::register($this);
 					<i class="fa fa-angle-down"></i>
 					</a>
 					<ul class="dropdown-menu dropdown-menu-default">
-						<li>
-							<a href="#">
-							<i class="icon-user"></i> My Profile </a>
-						</li>
+<!--						<li>-->
+<!--							<a href="#">-->
+<!--							<i class="icon-user"></i> My Profile</a>-->
+<!--						</li>-->
 						<li>
 							<a href="<?=Url::toRoute('/login/logout');?>">
-							<i class="icon-key"></i> Log Out </a>
+							<i class="icon-key"></i> 退出登录 </a>
 						</li>
 					</ul>
 				</li>

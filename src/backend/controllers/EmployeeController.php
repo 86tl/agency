@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use app\models\Employee;
+use app\models\Employee_service;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -97,12 +98,13 @@ class EmployeeController extends Controller
     public function actionCreate()
     {
         $model = new Employee();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $res=$model->save()) {
+            $this->set_service_info($model->id,$_REQUEST['service_data']);
             return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'data_set'=>$this->get_service_info()
             ]);
         }
     }
@@ -116,12 +118,13 @@ class EmployeeController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $this->set_service_info($id,$_REQUEST['service_data']);
             return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'data_set'=>$this->get_service_info($id)
             ]);
         }
     }
@@ -134,7 +137,6 @@ class EmployeeController extends Controller
      */
     public function actionDelete($id)
     {
-
         $this->findModel($id)->delete();
         return $this->redirect(['index']);
     }
@@ -152,6 +154,44 @@ class EmployeeController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+
+  public function get_service_info($id=null)
+  {
+    foreach(Yii::$app->params['empl_type'] as $k=>$v)
+    {
+        if($id)
+        {
+            $res = Employee_service::findone(['employee_id'=>$id,'type_id'=>$k]);
+            $arr[$k]['intro'] = $res->intro;
+            $arr[$k]['salary']=$res->salary;
+        }else
+        {
+            $arr[$k]['intro']='';
+            $arr[$k]['salary']='';
+        }
+    }
+      return json_encode($arr);
+  }
+
+    public function  set_service_info($id,$rawdata)
+    {
+        $data = json_decode($rawdata);
+        Employee_service::deleteAll(['employee_id'=>$id]);
+        foreach($data as $k=>$v)
+        {
+            if(is_null($v->intro)&&is_null($v->salary))
+            {
+                continue;
+            }
+            $res = new Employee_service();
+            $res->employee_id = $id;
+            $res->type_id = $k;
+            $res->intro = $v->intro;
+            $res->salary = $v->salary;
+            $res->save();
         }
     }
 

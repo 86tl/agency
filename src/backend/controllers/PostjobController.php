@@ -199,6 +199,7 @@ class PostjobController extends Controller
          {
              $res = PostJob::findOne($job_id);
              $res->job_status='1';
+             $res->employee_id = $_REQUEST[employee_id];
              $res->save();
              //var_dump($res->getErrors());
          }
