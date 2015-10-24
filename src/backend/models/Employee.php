@@ -32,6 +32,12 @@ use yii\web\UploadedFile;
  * @property integer $expected_salary
  * @property string $name
  *  @property string $tel
+ *  @property string $province
+ * @property string $city
+ * @property string $district
+ *@property string $qq
+ * @property string $wechat
+ * @property string $source
  */
 class Employee extends \yii\db\ActiveRecord
 {
@@ -51,7 +57,7 @@ class Employee extends \yii\db\ActiveRecord
         return [
             [['user_id', 'age', 'company_id','expected_salary'], 'integer'],
             [['last_update', 'create_time'], 'safe'],
-            [['status','tel'], 'string', 'max' => 30],
+            [['status','tel','province', 'city', 'district','qq','wechat', 'source'], 'string', 'max' => 30],
             [['rating', 'is_cleaning', 'is_housekeeper', 'is_elderlycare', 'is_matron', 'is_cook', 'is_babysitter', 'nationality',], 'string', 'max' => 10],
             [['identity_authorized', 'mobile_authorized', 'gender'], 'string', 'max' => 1],
             [['service_type'], 'string', 'max' => 20],
@@ -92,6 +98,9 @@ class Employee extends \yii\db\ActiveRecord
             'image' => '照片',
             'company_id' => '中介公司',
             'expected_salary' => '期望薪水',
+            'wechat' =>'微信',
+            'source'=>'加入来源',
+            'qq'=>'QQ号码'
         ];
     }
 

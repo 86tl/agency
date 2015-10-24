@@ -1,5 +1,67 @@
 <link href="<?=$this->context->get_path()?>/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css"/>
 <link href="<?=$this->context->get_path()?>/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+<script src="<?=$this->context->get_path()?>/custom/Area.js" type="text/javascript"></script>
+<script src="<?=$this->context->get_path()?>/custom/AreaData_min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function (){
+        initComplexArea('seachprov', 'seachcity', 'seachdistrict', area_array, sub_array, '44', '0', '0');
+        var city ="<?=$model->city;?>";
+        var district = '<?=$model->district?>';
+        if(city !='')
+        {
+            Pre_select("#seachcity",city)
+            changeCity($('#seachcity').val(),'seachdistrict','seachdistrict');
+            Pre_select("#seachdistrict",district)
+        }
+    });
+
+    function Pre_select(select_name,sel_val)
+    {
+        var temp = select_name+' option';
+        $(temp).each(function (){
+            if($(this).text().trim() == sel_val){
+                $(select_name).val($(this).val());
+            }
+        });
+    }
+
+    //得到地区码
+    function getAreaID(){
+        var area = 0;
+        if($("#seachdistrict").val() != "0"){
+            area = $("#seachdistrict").val();
+        }else if ($("#seachcity").val() != "0"){
+            area = $("#seachcity").val();
+        }else{
+            area = $("#seachprov").val();
+        }
+        return area;
+    }
+
+    function showAreaID() {
+        //地区码
+        var areaID = getAreaID();
+        //地区名
+        var areaName = getAreaNamebyID(areaID) ;
+        alert("您选择的地区码：" + areaID + "      地区名：" + areaName);
+    }
+
+    //根据地区码查询地区名
+    function getAreaNamebyID(areaID){
+        var areaName = "";
+        if(areaID.length == 2){
+            areaName = area_array[areaID];
+        }else if(areaID.length == 4){
+            var index1 = areaID.substring(0, 2);
+            areaName = area_array[index1] + " " + sub_array[index1][areaID];
+        }else if(areaID.length == 6){
+            var index1 = areaID.substring(0, 2);
+            var index2 = areaID.substring(0, 4);
+            areaName = area_array[index1] + " " + sub_array[index1][index2] + " " + sub_arr[index2][areaID];
+        }
+        return areaName;
+    }
+</script>
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -26,10 +88,24 @@ use yii\helpers\Url;
     <?= $form->field($model, 'nationality')->dropDownList(Yii::$app->params['empl_nation'],['prompt'=>'请选择']) ?>
 
     <?= $form->field($model, 'language')->checkboxList(Yii::$app->params['empl_lan']) ?>
-
-    <?= $form->field($model, 'expected_salary')->textInput() ?>
-
+    <div class="form-group field-employee-language">
+        <label for="employee-language" class="col-md-3 control-label">所在地区</label>
+        <div class="col-md-4">
+                <select id="seachprov"  disabled="disabled" onChange="changeComplexProvince(this.value, sub_array, 'seachcity', 'seachdistrict');"></select>&nbsp;&nbsp;&nbsp;
+                <select id="seachcity"  onChange="changeCity(this.value,'seachdistrict','seachdistrict');"></select>&nbsp;&nbsp;&nbsp;
+                <span id="seachdistrict_div"><select id="seachdistrict"></select></span>
+                <input type="hidden" name="Employee[province]"  value="广东省">
+                <input type="hidden" name="Employee[city]" class="c_val">
+                <input type="hidden" name="Employee[district]" class="d_val">
+        </div>
+    </div>
     <?= $form->field($model, 'status')->dropDownList(Yii::$app->params['empl_status'],['prompt'=>'请选择']) ?>
+
+    <?= $form->field($model, 'qq')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'wechat')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'source')->dropDownList(Yii::$app->params['source'],['prompt'=>'请选择']) ?>
 
     <?= $form->field($model, 'rating')->textInput(['maxlength' => true]) ?>
 
@@ -132,6 +208,8 @@ $('#save_type').click(function()
     $('#sub_btn').click(function()
     {
         $('#service_data').attr('value',JSON.stringify(type_sets));
+        $('.c_val').attr('value',$('#seachcity option:selected').text());
+        $('.d_val').attr('value',$('#seachdistrict option:selected').text());
         //$('#w0').submit();
         return true;
     });
